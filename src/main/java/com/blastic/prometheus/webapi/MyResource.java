@@ -1,4 +1,4 @@
-package com.mycompany.prometheus.webapi;
+package com.blastic.prometheus.webapi;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
