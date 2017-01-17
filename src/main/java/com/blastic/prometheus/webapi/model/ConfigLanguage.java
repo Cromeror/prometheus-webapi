@@ -8,7 +8,7 @@ import java.util.Properties;
 
 /**
  *
- * @author Gustavo Pacheco <ryctabo@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public class ConfigLanguage {
@@ -21,7 +21,7 @@ public class ConfigLanguage {
     /**
      * Format of path file for properties language.
      */
-    private static final String FORMAT_PATH_FILE = "com/nativapps/arpia/"
+    private static final String FORMAT_PATH_FILE = "com/blastic/prometheus/webapi/"
             + "language/language_%s.properties";
 
     /**

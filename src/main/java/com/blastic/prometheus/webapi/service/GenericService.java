@@ -8,7 +8,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Gustavo Pacheco <ryctabo@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public class GenericService implements Service {

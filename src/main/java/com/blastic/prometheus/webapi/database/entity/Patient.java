@@ -31,8 +31,8 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name = "PERSON")
 @NamedQueries({
-    @NamedQuery(name = "person.findByIdentification",
-            query = "select p from Person p where p.identification = :ide")
+    @NamedQuery(name = "patient.findByIdentification",
+            query = "select p from Patient p where p.identification = :ide")
 })
 @Inheritance(strategy = InheritanceType.JOINED)
 public class Patient implements Serializable {

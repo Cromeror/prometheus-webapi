@@ -1,4 +1,4 @@
-package com.blastic.prometheus.webapi;
+package com.blastic.prometheus.webapi.rest.resource;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

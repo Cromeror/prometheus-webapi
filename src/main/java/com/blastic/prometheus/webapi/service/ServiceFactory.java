@@ -1,7 +1,5 @@
 package com.blastic.prometheus.webapi.service;
 
-import com.blastic.prometheus.webapi.database.EntityControllerFactory;
-
 /**
  * The <strong>ServiceFactory</strong> class provided methods to get services
  * implementations.
@@ -11,4 +9,8 @@ import com.blastic.prometheus.webapi.database.EntityControllerFactory;
  * @version 1.0-SNAPSHOT
  */
 public class ServiceFactory {
+
+    public static PatientService getPatientService() {
+        return new PatientServiceImpl();
+    }
 }

@@ -36,7 +36,7 @@ public class EntityDao<T extends Serializable, I>
      * the name of persistence unit of datasource for connection in the
      * database.
      */
-    public static final String PERSISTENCE_UNIT = "ArpiaPU";
+    public static final String PERSISTENCE_UNIT = "PROMETHEUS_PU";
 
     /**
      * The entity manager factory created by persistence unit.

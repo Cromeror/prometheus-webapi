@@ -38,7 +38,7 @@ public class PatientDaoController extends EntityDao<Patient, Long>
 
     @Override
     public Patient findByIdentification(String identification) {
-        return executeNamedQuery("person.findByIdentification",
+        return executeNamedQuery("patient.findByIdentification",
                 new Parameter("ide", identification));
     }
 

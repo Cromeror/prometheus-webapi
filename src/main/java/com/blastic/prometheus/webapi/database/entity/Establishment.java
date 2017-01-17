@@ -23,11 +23,6 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name = "ESTABLISHMENT")
-@NamedQueries({
-    @NamedQuery(name = "establishment.findByCustomerId",
-            query = "SELECT e FROM Establishment e "
-            + "WHERE e.customerData.id = :customerId")
-})
 public class Establishment implements Serializable {
 
     @Id

@@ -28,7 +28,7 @@ import com.blastic.prometheus.webapi.util.TextUtil;
 
 /**
  *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public class PatientServiceImpl extends GenericService implements PatientService,
@@ -55,16 +55,16 @@ public class PatientServiceImpl extends GenericService implements PatientService
             ErrorMessageData errors = new ErrorMessageData();
             if (data.getIdentification() == null)
                 errors.addMessage(config
-                        .getString("person.identification_required"));
+                        .getString("person.identification"));
             if (data.getName() == null)
-                errors.addMessage(config.getString("person.name_required"));
+                errors.addMessage(config.getString("person.name"));
             if (data.getLastName() == null)
-                errors.addMessage(config.getString("person.last_name_required"));
+                errors.addMessage(config.getString("person.last_name"));
             if (data.getBirthday() == null)
-                errors.addMessage(config.getString("person.birthday_required"));
+                errors.addMessage(config.getString("person.birthday"));
             if (data.getGender() == null)
-                errors.addMessage(config.getString("person.gender_required"));
-
+                errors.addMessage(config.getString("person.gender"));
+            
             if (data.getAddresses() != null && !data.getAddresses().isEmpty()) {
                 for (AddressData address : data.getAddresses()) {
                     if (address.getNeighborhood() == null)
