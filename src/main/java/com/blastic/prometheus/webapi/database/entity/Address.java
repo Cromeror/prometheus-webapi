@@ -51,7 +51,7 @@ public class Address implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSON_ID")
-    private Person person;
+    private Patient person;
 
     @OneToOne
     @JoinColumn(name = "NEIGHBORHOOD")
@@ -111,11 +111,11 @@ public class Address implements Serializable {
         this.neighborhood = neighborhood;
     }
 
-    public Person getPerson() {
+    public Patient getPerson() {
         return person;
     }
 
-    public void setPerson(Person person) {
+    public void setPerson(Patient person) {
         this.person = person;
 
         if (!person.getAddresses().contains(this)) {

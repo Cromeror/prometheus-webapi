@@ -45,7 +45,7 @@ public class Phone implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OWNER_ID", nullable = false)
-    private Person owner;
+    private Patient owner;
 
     @Column(name = "CONFIRMED")
     private boolean confirmed;
@@ -108,11 +108,11 @@ public class Phone implements Serializable {
         this.confirmed = confirmed;
     }
 
-    public Person getOwner() {
+    public Patient getOwner() {
         return owner;
     }
 
-    public void setOwner(Person person) {
+    public void setOwner(Patient person) {
         this.owner = person;
 
         if (!person.getPhones().contains(this))

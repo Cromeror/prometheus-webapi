@@ -35,7 +35,7 @@ import org.hibernate.annotations.FetchMode;
             query = "select p from Person p where p.identification = :ide")
 })
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Person implements Serializable {
+public class Patient implements Serializable {
 
     @Id
     @Column(name = "PERSON_ID")
@@ -74,26 +74,26 @@ public class Person implements Serializable {
     @Temporal(TemporalType.DATE)
     private Calendar birthday;
 
-    public Person() {
+    public Patient() {
         this.emails = new ArrayList<>();
         this.phones = new ArrayList<>();
         this.addresses = new ArrayList<>();
     }
 
-    public Person(long id) {
+    public Patient(long id) {
         this.id = id;
         this.emails = new ArrayList<>();
         this.phones = new ArrayList<>();
         this.addresses = new ArrayList<>();
     }
 
-    public Person(String identification, String name, String lastName) {
+    public Patient(String identification, String name, String lastName) {
         this.identification = identification;
         this.name = name;
         this.lastName = lastName;
     }
 
-    public Person(String identification, String name, String lastName,
+    public Patient(String identification, String name, String lastName,
             Gender gender) {
         this.identification = identification;
         this.name = name;
@@ -104,7 +104,7 @@ public class Person implements Serializable {
         this.addresses = new ArrayList<>();
     }
 
-    public Person(String identification, String name, String lastName,
+    public Patient(String identification, String name, String lastName,
             Gender gender, Calendar birthday) {
         this.identification = identification;
         this.name = name;

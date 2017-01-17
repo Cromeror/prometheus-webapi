@@ -41,7 +41,7 @@ public class Email implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OWNER_ID", nullable = false)
-    private Person owner;
+    private Patient owner;
 
     public Email() {
     }
@@ -50,7 +50,7 @@ public class Email implements Serializable {
         this.address = address;
     }
 
-    public Email(long id, String address, boolean confirmed, Person owner) {
+    public Email(long id, String address, boolean confirmed, Patient owner) {
         this.id = id;
         this.address = address;
         this.confirmed = confirmed;
@@ -81,11 +81,11 @@ public class Email implements Serializable {
         this.confirmed = confirmed;
     }
 
-    public Person getOwner() {
+    public Patient getOwner() {
         return owner;
     }
 
-    public void setOwner(Person person) {
+    public void setOwner(Patient person) {
         this.owner = person;
         if (!person.getEmails().contains(this))
             person.addEmail(this);
