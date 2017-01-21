@@ -14,7 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
+ *
+ * @author Gustavo Pacheco <ryctabo@gmail.com>
  * @version 1.0
  */
 @Entity
@@ -41,7 +42,7 @@ public class Email implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OWNER_ID", nullable = false)
-    private Patient owner;
+    private Person owner;
 
     public Email() {
     }
@@ -50,7 +51,7 @@ public class Email implements Serializable {
         this.address = address;
     }
 
-    public Email(long id, String address, boolean confirmed, Patient owner) {
+    public Email(long id, String address, boolean confirmed, Person owner) {
         this.id = id;
         this.address = address;
         this.confirmed = confirmed;
@@ -81,11 +82,11 @@ public class Email implements Serializable {
         this.confirmed = confirmed;
     }
 
-    public Patient getOwner() {
+    public Person getOwner() {
         return owner;
     }
 
-    public void setOwner(Patient person) {
+    public void setOwner(Person person) {
         this.owner = person;
         if (!person.getEmails().contains(this))
             person.addEmail(this);

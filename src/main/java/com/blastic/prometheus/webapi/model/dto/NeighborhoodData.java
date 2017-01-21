@@ -7,9 +7,7 @@ package com.blastic.prometheus.webapi.model.dto;
  */
 public class NeighborhoodData {
 
-    private String name;
-
-    private Long id;
+    protected String name;
 
     public NeighborhoodData() {
     }
@@ -17,12 +15,7 @@ public class NeighborhoodData {
     public NeighborhoodData(String name) {
         this.name = name;
     }
-
-    public NeighborhoodData(Long id, String name) {
-        this.name = name;
-        this.id = id;
-    }
-
+    
     public String getName() {
         return name;
     }
@@ -30,13 +23,4 @@ public class NeighborhoodData {
     public void setName(String name) {
         this.name = name;
     }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
 }

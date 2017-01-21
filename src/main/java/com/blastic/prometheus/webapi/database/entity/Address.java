@@ -15,23 +15,21 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 /**
- * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
+ *
+ * @author Gustavo Pacheco <ryctabo@gmail.com>
  * @version 1.0
  */
 @Entity
 @Table(name = "ADDRESS")
 @NamedQueries({
     @NamedQuery(name = "address.findAllByPersonId",
-            query = "SELECT a FROM Address a WHERE a.person.id = :personId")
-    ,
+            query = "SELECT a FROM Address a WHERE a.person.id = :personId"),
     @NamedQuery(name = "address.findAllByEstablishmentId",
             query = "SELECT a FROM Address a WHERE "
-            + "a.establishment.id = :establishmentId")
-    ,
+            + "a.establishment.id = :establishmentId"),
     @NamedQuery(name = "address.findByPersonId",
             query = "SELECT a FROM Address a WHERE a.id = :id "
-            + "AND a.person.id = :personId")
-    ,
+            + "AND a.person.id = :personId"),
     @NamedQuery(name = "address.findByEstablishmentId",
             query = "SELECT a FROM Address a WHERE a.id = :id AND "
             + "a.establishment.id = :establishmentId")
@@ -51,8 +49,8 @@ public class Address implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSON_ID")
-    private Patient person;
-
+    private Person person;
+    
     @OneToOne
     @JoinColumn(name = "NEIGHBORHOOD")
     private Neighborhood neighborhood;
@@ -64,7 +62,7 @@ public class Address implements Serializable {
     public Address() {
     }
 
-    public Address(String tag, String residentialAddress,
+    public Address(String tag, String residentialAddress, 
             Neighborhood neighborhood) {
         this.tag = tag;
         this.residentialAddress = residentialAddress;
@@ -110,12 +108,12 @@ public class Address implements Serializable {
     public void setNeighborhood(Neighborhood neighborhood) {
         this.neighborhood = neighborhood;
     }
-
-    public Patient getPerson() {
+    
+    public Person getPerson() {
         return person;
     }
 
-    public void setPerson(Patient person) {
+    public void setPerson(Person person) {
         this.person = person;
 
         if (!person.getAddresses().contains(this)) {

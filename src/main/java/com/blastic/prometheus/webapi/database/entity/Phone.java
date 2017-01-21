@@ -16,7 +16,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 /**
- * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
+ *
+ * @author Gustavo Pacheco <ryctabo@gmail.com>
  * @version 1.0
  */
 @Entity
@@ -45,7 +46,7 @@ public class Phone implements Serializable {
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "OWNER_ID", nullable = false)
-    private Patient owner;
+    private Person owner;
 
     @Column(name = "CONFIRMED")
     private boolean confirmed;
@@ -108,11 +109,11 @@ public class Phone implements Serializable {
         this.confirmed = confirmed;
     }
 
-    public Patient getOwner() {
+    public Person getOwner() {
         return owner;
     }
 
-    public void setOwner(Patient person) {
+    public void setOwner(Person person) {
         this.owner = person;
 
         if (!person.getPhones().contains(this))

@@ -4,10 +4,14 @@ import com.blastic.prometheus.webapi.database.dao.AddressDao;
 import com.blastic.prometheus.webapi.database.dao.AddressDaoController;
 import com.blastic.prometheus.webapi.database.dao.EmailDao;
 import com.blastic.prometheus.webapi.database.dao.EmailDaoController;
+import com.blastic.prometheus.webapi.database.dao.EstablishmentDao;
+import com.blastic.prometheus.webapi.database.dao.EstablishmentDaoController;
 import com.blastic.prometheus.webapi.database.dao.NeighborhoodDao;
 import com.blastic.prometheus.webapi.database.dao.NeighborhoodDaoController;
-import com.blastic.prometheus.webapi.database.dao.PatientDaoController;
-import com.blastic.prometheus.webapi.database.dao.PatientDao;
+import com.blastic.prometheus.webapi.database.dao.ParticularDao;
+import com.blastic.prometheus.webapi.database.dao.ParticularDaoController;
+import com.blastic.prometheus.webapi.database.dao.PersonDao;
+import com.blastic.prometheus.webapi.database.dao.PersonDaoController;
 import com.blastic.prometheus.webapi.database.dao.PhoneDao;
 import com.blastic.prometheus.webapi.database.dao.PhoneDaoController;
 
@@ -20,8 +24,8 @@ import com.blastic.prometheus.webapi.database.dao.PhoneDaoController;
  */
 public class EntityControllerFactory {
 
-    public static PatientDao getPatientController() {
-        return PatientDaoController.getInstance();
+    public static ParticularDao getParticularController() {
+        return ParticularDaoController.getInstance();
     }
 
     public static EmailDao getEmailController() {
@@ -38,5 +42,13 @@ public class EntityControllerFactory {
 
     public static NeighborhoodDao getNeighborhoodController() {
         return NeighborhoodDaoController.getInstance();
+    }
+
+    public static EstablishmentDao getEstablishmentDao() {
+        return EstablishmentDaoController.getInstance();
+    }
+
+    public static PersonDao getPersonController() {
+        return PersonDaoController.getInstance();
     }
 }

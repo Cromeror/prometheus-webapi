@@ -2,15 +2,16 @@ package com.blastic.prometheus.webapi.service;
 
 import com.blastic.prometheus.webapi.database.entity.Gender;
 import com.blastic.prometheus.webapi.model.OrderType;
-import com.blastic.prometheus.webapi.model.dto.PatientData;
-import java.util.List;
+import com.blastic.prometheus.webapi.model.dto.ListResponse;
+import com.blastic.prometheus.webapi.model.dto.ParticularRequest;
+import com.blastic.prometheus.webapi.model.dto.ParticularResponse;
 
 /**
  *
  * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
  * @version 1.0
  */
-public interface PatientService extends Service {
+public interface ParticularService extends Service {
 
     /**
      * Create new Particular client from the given data
@@ -18,7 +19,7 @@ public interface PatientService extends Service {
      * @param data Particular entity information
      * @return saved entity
      */
-    PatientData add(PatientData data);
+    ParticularResponse add(ParticularRequest data);
 
     /**
      * Get Particular client information by id provided
@@ -26,7 +27,7 @@ public interface PatientService extends Service {
      * @param id entity identifier to search
      * @return searched entity
      */
-    PatientData get(Long id);
+    ParticularResponse get(Long id);
 
     /**
      * Get all Particular clients
@@ -39,7 +40,7 @@ public interface PatientService extends Service {
      * @param gender Filter gender
      * @return Particular entities list
      */
-    List<PatientData> getAll(int start, int size, String search,
+    ListResponse<ParticularResponse> getAll(int start, int size, String search,
             String orderBy, OrderType orderType, Gender gender);
 
     /**
@@ -49,7 +50,7 @@ public interface PatientService extends Service {
      * @param data Particular entity information
      * @return saved entity
      */
-    PatientData update(Long id, PatientData data);
+    ParticularResponse update(Long id, ParticularRequest data);
 
     /**
      * Delete Particular client entity by id provided
@@ -57,6 +58,6 @@ public interface PatientService extends Service {
      * @param id entity identifier to delete
      * @return deleted entity
      */
-    PatientData delete(Long id);
+    ParticularResponse delete(Long id);
 
 }

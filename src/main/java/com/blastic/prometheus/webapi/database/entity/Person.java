@@ -25,17 +25,18 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
- * @version 1.0
+ *
+ * @author Gustavo Pacheco <ryctabo@gmail.com>
+ * @version 1.1.0
  */
 @Entity
 @Table(name = "PERSON")
 @NamedQueries({
-    @NamedQuery(name = "patient.findByIdentification",
-            query = "select p from Patient p where p.identification = :ide")
+    @NamedQuery(name = "person.findByIdentification",
+            query = "select p from Person p where p.identification = :ide")
 })
 @Inheritance(strategy = InheritanceType.JOINED)
-public class Patient implements Serializable {
+public class Person implements Serializable {
 
     @Id
     @Column(name = "PERSON_ID")
@@ -74,26 +75,26 @@ public class Patient implements Serializable {
     @Temporal(TemporalType.DATE)
     private Calendar birthday;
 
-    public Patient() {
+    public Person() {
         this.emails = new ArrayList<>();
         this.phones = new ArrayList<>();
         this.addresses = new ArrayList<>();
     }
 
-    public Patient(long id) {
+    public Person(long id) {
         this.id = id;
         this.emails = new ArrayList<>();
         this.phones = new ArrayList<>();
         this.addresses = new ArrayList<>();
     }
 
-    public Patient(String identification, String name, String lastName) {
+    public Person(String identification, String name, String lastName) {
         this.identification = identification;
         this.name = name;
         this.lastName = lastName;
     }
 
-    public Patient(String identification, String name, String lastName,
+    public Person(String identification, String name, String lastName,
             Gender gender) {
         this.identification = identification;
         this.name = name;
@@ -104,7 +105,7 @@ public class Patient implements Serializable {
         this.addresses = new ArrayList<>();
     }
 
-    public Patient(String identification, String name, String lastName,
+    public Person(String identification, String name, String lastName,
             Gender gender, Calendar birthday) {
         this.identification = identification;
         this.name = name;
