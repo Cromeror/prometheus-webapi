@@ -3,8 +3,7 @@ package com.blastic.prometheus.webapi.service;
 import java.util.Locale;
 
 /**
- *
- * @author Gustavo Pacheco <ryctabo@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public interface Service {

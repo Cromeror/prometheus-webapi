@@ -23,8 +23,7 @@ import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
 
 /**
- *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")

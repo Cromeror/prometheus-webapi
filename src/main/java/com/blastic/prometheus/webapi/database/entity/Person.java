@@ -25,9 +25,8 @@ import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
 /**
- *
- * @author Gustavo Pacheco <ryctabo@gmail.com>
- * @version 1.1.0
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
+ * @version 1.0
  */
 @Entity
 @Table(name = "PERSON")

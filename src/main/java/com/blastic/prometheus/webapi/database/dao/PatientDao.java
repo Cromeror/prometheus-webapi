@@ -2,7 +2,7 @@ package com.blastic.prometheus.webapi.database.dao;
 
 import com.blastic.prometheus.webapi.database.DataAccessObject;
 import com.blastic.prometheus.webapi.database.entity.Gender;
-import com.blastic.prometheus.webapi.database.entity.Particular;
+import com.blastic.prometheus.webapi.database.entity.Patient;
 import com.blastic.prometheus.webapi.model.OrderType;
 import java.util.List;
 
@@ -11,7 +11,7 @@ import java.util.List;
  * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
  * @version 1.0
  */
-public interface ParticularDao extends DataAccessObject<Particular, Long> {
+public interface PatientDao extends DataAccessObject<Patient, Long> {
 
     /**
      * Return a filter particular list by string
@@ -24,16 +24,16 @@ public interface ParticularDao extends DataAccessObject<Particular, Long> {
      * @param gender Filter gender
      * @return Filter list
      */
-    List<Particular> findAll(int start, int size, String search, String orderBy,
+    List<Patient> findAll(int start, int size, String search, String orderBy,
             OrderType orderType, Gender gender);
 
     /**
      * Returns a particular entity by customer ID
      *
      * @param id Customer ID
-     * @return Particular entity
+     * @return Patient entity
      */
-    Particular findByCustomerId(Long id);
+    Patient findByCustomerId(Long id);
 
     /**
      * Return the find all result count

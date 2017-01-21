@@ -3,15 +3,14 @@ package com.blastic.prometheus.webapi.service;
 import com.blastic.prometheus.webapi.database.entity.Gender;
 import com.blastic.prometheus.webapi.model.OrderType;
 import com.blastic.prometheus.webapi.model.dto.ListResponse;
-import com.blastic.prometheus.webapi.model.dto.ParticularRequest;
+import com.blastic.prometheus.webapi.model.dto.PatientRequest;
 import com.blastic.prometheus.webapi.model.dto.ParticularResponse;
 
 /**
- *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public interface ParticularService extends Service {
+public interface PatientService extends Service {
 
     /**
      * Create new Particular client from the given data
@@ -19,7 +18,7 @@ public interface ParticularService extends Service {
      * @param data Particular entity information
      * @return saved entity
      */
-    ParticularResponse add(ParticularRequest data);
+    ParticularResponse add(PatientRequest data);
 
     /**
      * Get Particular client information by id provided
@@ -50,7 +49,7 @@ public interface ParticularService extends Service {
      * @param data Particular entity information
      * @return saved entity
      */
-    ParticularResponse update(Long id, ParticularRequest data);
+    ParticularResponse update(Long id, PatientRequest data);
 
     /**
      * Delete Particular client entity by id provided

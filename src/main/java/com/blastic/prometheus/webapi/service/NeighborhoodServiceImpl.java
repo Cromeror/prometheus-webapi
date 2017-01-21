@@ -12,8 +12,7 @@ import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 
 /**
- *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public class NeighborhoodServiceImpl extends GenericService implements NeighborhoodService,

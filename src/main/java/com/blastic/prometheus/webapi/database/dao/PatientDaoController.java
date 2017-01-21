@@ -2,7 +2,7 @@ package com.blastic.prometheus.webapi.database.dao;
 
 import com.blastic.prometheus.webapi.database.EntityDao;
 import com.blastic.prometheus.webapi.database.entity.Gender;
-import com.blastic.prometheus.webapi.database.entity.Particular;
+import com.blastic.prometheus.webapi.database.entity.Patient;
 import com.blastic.prometheus.webapi.database.exception.DatabaseException;
 import com.blastic.prometheus.webapi.model.OrderType;
 import java.util.ArrayList;
@@ -22,32 +22,32 @@ import javax.persistence.criteria.Root;
  * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
  * @version 1.0
  */
-public class ParticularDaoController extends EntityDao<Particular, Long>
-        implements ParticularDao {
+public class PatientDaoController extends EntityDao<Patient, Long>
+        implements PatientDao {
 
-    private static final Logger LOG = Logger.getLogger(ParticularDaoController.class.getName());
+    private static final Logger LOG = Logger.getLogger(PatientDaoController.class.getName());
 
-    private static final ParticularDaoController INSTANCE
-            = new ParticularDaoController();
+    private static final PatientDaoController INSTANCE
+            = new PatientDaoController();
 
-    private ParticularDaoController() {
-        super(Particular.class);
+    private PatientDaoController() {
+        super(Patient.class);
     }
 
-    public static ParticularDaoController getInstance() {
+    public static PatientDaoController getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public List<Particular> findAll(int start, int size, String search,
+    public List<Patient> findAll(int start, int size, String search,
             String orderBy, OrderType orderType, Gender gender) {
         EntityManager manager = getEntityManager();
         try {
             CriteriaBuilder cb = manager.getCriteriaBuilder();
-            CriteriaQuery<Particular> query = cb
-                    .createQuery(Particular.class);
+            CriteriaQuery<Patient> query = cb
+                    .createQuery(Patient.class);
 
-            Root<Particular> p = query.from(Particular.class);
+            Root<Patient> p = query.from(Patient.class);
             query.select(p);
 
             Predicate[] restrictions = getRestrictions(manager, p, search, gender);
@@ -61,7 +61,7 @@ public class ParticularDaoController extends EntityDao<Particular, Long>
                     query.orderBy(cb.desc(p.get(orderBy)));
             }
 
-            TypedQuery<Particular> typedQuery = manager.createQuery(query);
+            TypedQuery<Patient> typedQuery = manager.createQuery(query);
 
             return size == 0 ? typedQuery.getResultList() : typedQuery
                     .setMaxResults(size).setFirstResult(start).getResultList();
@@ -75,7 +75,7 @@ public class ParticularDaoController extends EntityDao<Particular, Long>
     }
 
     @Override
-    public Particular findByCustomerId(Long id) {
+    public Patient findByCustomerId(Long id) {
         return executeNamedQuery("particular.findByCustomerId",
                 new Parameter("customerId", id));
     }
@@ -87,7 +87,7 @@ public class ParticularDaoController extends EntityDao<Particular, Long>
             CriteriaBuilder cb = manager.getCriteriaBuilder();
             CriteriaQuery<Long> query = cb.createQuery(Long.class);
 
-            Root<Particular> p = query.from(Particular.class);
+            Root<Patient> p = query.from(Patient.class);
             query.select(cb.count(p));
 
             Predicate[] restrictions = getRestrictions(manager, p, search, gender);
@@ -104,7 +104,7 @@ public class ParticularDaoController extends EntityDao<Particular, Long>
         }
     }
 
-    private Predicate[] getRestrictions(EntityManager manager, Root<Particular> p,
+    private Predicate[] getRestrictions(EntityManager manager, Root<Patient> p,
             String search, Gender gender) {
 
         CriteriaBuilder cb = manager.getCriteriaBuilder();

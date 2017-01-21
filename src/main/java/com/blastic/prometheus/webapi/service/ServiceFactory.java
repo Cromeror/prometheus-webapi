@@ -28,8 +28,8 @@ public class ServiceFactory {
         return new EstablishmentServiceImpl();
     }
 
-    public static ParticularService getParticularService() {
-        return new ParticularServiceImpl();
+    public static PatientService getParticularService() {
+        return new PatientServiceImpl();
     }
 
     public static NeighborhoodService getNeighborhoodService() {

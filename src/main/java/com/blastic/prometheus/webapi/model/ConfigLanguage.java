@@ -8,7 +8,7 @@ import java.util.Properties;
 
 /**
  *
- * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
+ * @author Gustavo Pacheco <ryctabo@gmail.com>
  * @version 1.0
  */
 public class ConfigLanguage {

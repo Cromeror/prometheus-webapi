@@ -10,7 +10,7 @@ import java.io.Serializable;
  * @param <RQ> Request entity
  * @param <RS> Response entity
  *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public interface DtoConverter<E extends Serializable, RQ, RS> {

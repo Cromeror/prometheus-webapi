@@ -8,7 +8,7 @@ import javax.ws.rs.QueryParam;
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public class ParticularBean {
+public class PatientBean {
 
     @QueryParam("start")
     private int start;

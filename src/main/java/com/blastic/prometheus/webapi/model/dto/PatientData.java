@@ -7,7 +7,7 @@ import java.util.Calendar;
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public class ParticularData {
+public class PatientData {
 
     protected String identification;
 
@@ -21,10 +21,10 @@ public class ParticularData {
 
     protected String observations;
 
-    public ParticularData() {
+    public PatientData() {
     }
 
-    public ParticularData(String identification, String name, String lastName,
+    public PatientData(String identification, String name, String lastName,
             Gender gender, Calendar birthday, String observations) {
         this.identification = identification;
         this.name = name;

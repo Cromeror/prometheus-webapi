@@ -5,11 +5,10 @@ import java.util.Calendar;
 import java.util.List;
 
 /**
- *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public class ParticularRequest extends ParticularData {
+public class PatientRequest extends PatientData {
 
     private List<AddressRequest> addresses;
 
@@ -17,10 +16,10 @@ public class ParticularRequest extends ParticularData {
 
     private List<PhoneRequest> phones;
 
-    public ParticularRequest() {
+    public PatientRequest() {
     }
 
-    public ParticularRequest(String identification, String name,
+    public PatientRequest(String identification, String name,
             String lastName, Gender gender, Calendar birthday,
             String observations) {
         super(identification, name, lastName, gender, birthday, observations);

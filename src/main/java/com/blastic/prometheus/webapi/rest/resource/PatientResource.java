@@ -1,10 +1,9 @@
 package com.blastic.prometheus.webapi.rest.resource;
 
 import com.blastic.prometheus.webapi.model.dto.ListResponse;
-import com.blastic.prometheus.webapi.model.dto.ParticularRequest;
+import com.blastic.prometheus.webapi.model.dto.PatientRequest;
 import com.blastic.prometheus.webapi.model.dto.ParticularResponse;
-import com.blastic.prometheus.webapi.rest.bean.ParticularBean;
-import com.blastic.prometheus.webapi.service.ParticularService;
+import com.blastic.prometheus.webapi.rest.bean.PatientBean;
 import com.blastic.prometheus.webapi.service.ServiceFactory;
 import java.net.URI;
 import java.util.Collections;
@@ -22,27 +21,25 @@ import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.UriInfo;
+import com.blastic.prometheus.webapi.service.PatientService;
 
 /**
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
+@Path("patients")
 @Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 @Consumes(MediaType.APPLICATION_JSON + ";charset=utf-8")
-public class ParticularResource {
+public class PatientResource {
 
     @Context
     private HttpServletRequest request;
 
-    private final ParticularService service = ServiceFactory
+    private final PatientService service = ServiceFactory
             .getParticularService();
 
-    public ParticularResource(HttpServletRequest request) {
-        this.request = request;
-    }
-
     @GET
-    public ListResponse<ParticularResponse> getAll(@BeanParam ParticularBean bean) {
+    public ListResponse<ParticularResponse> getAll(@BeanParam PatientBean bean) {
         if (bean.getSize() == null)
             bean.setSize(20);
         service.configurate(Collections.list(request.getLocales()));
@@ -58,7 +55,7 @@ public class ParticularResource {
     }
 
     @POST
-    public Response post(ParticularRequest data, @Context UriInfo uriInfo) {
+    public Response post(PatientRequest data, @Context UriInfo uriInfo) {
         service.configurate(Collections.list(request.getLocales()));
         ParticularResponse newParticular = service.add(data);
         URI location = uriInfo.getAbsolutePathBuilder().path(newParticular
@@ -69,7 +66,7 @@ public class ParticularResource {
     @PUT
     @Path("{id}")
     public ParticularResponse put(@PathParam("id") Long id,
-            ParticularRequest data) {
+            PatientRequest data) {
         service.configurate(Collections.list(request.getLocales()));
         return service.update(id, data);
     }

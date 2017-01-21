@@ -3,13 +3,12 @@ package com.blastic.prometheus.webapi.service;
 import com.blastic.prometheus.webapi.database.EntityControllerFactory;
 import com.blastic.prometheus.webapi.database.dao.EmailDao;
 import com.blastic.prometheus.webapi.database.dao.NeighborhoodDao;
-import com.blastic.prometheus.webapi.database.dao.ParticularDao;
 import com.blastic.prometheus.webapi.database.dao.PhoneDao;
 import com.blastic.prometheus.webapi.database.entity.Address;
 import com.blastic.prometheus.webapi.database.entity.Email;
 import com.blastic.prometheus.webapi.database.entity.Gender;
 import com.blastic.prometheus.webapi.database.entity.Neighborhood;
-import com.blastic.prometheus.webapi.database.entity.Particular;
+import com.blastic.prometheus.webapi.database.entity.Patient;
 import com.blastic.prometheus.webapi.database.entity.Phone;
 import com.blastic.prometheus.webapi.model.OrderType;
 import com.blastic.prometheus.webapi.model.dto.AddressRequest;
@@ -19,7 +18,7 @@ import com.blastic.prometheus.webapi.model.dto.EmailResponse;
 import com.blastic.prometheus.webapi.model.dto.ErrorMessageData;
 import com.blastic.prometheus.webapi.model.dto.ListResponse;
 import com.blastic.prometheus.webapi.model.dto.NeighborhoodResponse;
-import com.blastic.prometheus.webapi.model.dto.ParticularRequest;
+import com.blastic.prometheus.webapi.model.dto.PatientRequest;
 import com.blastic.prometheus.webapi.model.dto.ParticularResponse;
 import com.blastic.prometheus.webapi.model.dto.PhoneRequest;
 import com.blastic.prometheus.webapi.model.dto.PhoneResponse;
@@ -30,17 +29,17 @@ import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
+import com.blastic.prometheus.webapi.database.dao.PatientDao;
 
 /**
- *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public class ParticularServiceImpl extends GenericService implements ParticularService,
-        DtoConverter<Particular, ParticularRequest, ParticularResponse> {
+public class PatientServiceImpl extends GenericService implements PatientService,
+        DtoConverter<Patient, PatientRequest, ParticularResponse> {
 
-    private final ParticularDao particularDao = EntityControllerFactory
-            .getParticularController();
+    private final PatientDao particularDao = EntityControllerFactory
+            .getPatientController();
 
     private final EmailDao emailDao = EntityControllerFactory
             .getEmailController();
@@ -52,7 +51,7 @@ public class ParticularServiceImpl extends GenericService implements ParticularS
             .getNeighborhoodController();
 
     @Override
-    public ParticularResponse add(ParticularRequest data) {
+    public ParticularResponse add(PatientRequest data) {
         if (data == null)
             throw new BadRequestException(config
                     .getString("particular.is_null"));
@@ -139,11 +138,11 @@ public class ParticularServiceImpl extends GenericService implements ParticularS
      * @param id ID of the particular
      * @return searched entity
      */
-    private Particular getEntity(Long id) {
+    private Patient getEntity(Long id) {
         if (id == null || id <= 0)
             throw new BadRequestException(config.getString("person.id_required"));
 
-        Particular particular = particularDao.findByCustomerId(id);
+        Patient particular = particularDao.findByCustomerId(id);
 
         if (particular == null)
             throw new NotFoundException(String.format(config
@@ -161,10 +160,10 @@ public class ParticularServiceImpl extends GenericService implements ParticularS
             throw new BadRequestException(config.getString("pagination.size"));
 
         List<ParticularResponse> response = new ArrayList<>();
-        List<Particular> result = particularDao.findAll(start, size, search,
+        List<Patient> result = particularDao.findAll(start, size, search,
                 orderBy, orderType, gender);
 
-        for (Particular particular : result) {
+        for (Patient particular : result) {
             response.add(convertToDto(particular));
         }
 
@@ -173,8 +172,8 @@ public class ParticularServiceImpl extends GenericService implements ParticularS
     }
 
     @Override
-    public ParticularResponse update(Long id, ParticularRequest data) {
-        Particular entity = getEntity(id);
+    public ParticularResponse update(Long id, PatientRequest data) {
+        Patient entity = getEntity(id);
 
         if (!TextUtil.isEmpty(data.getIdentification()) && !data
                 .getIdentification().equalsIgnoreCase(entity
@@ -203,8 +202,8 @@ public class ParticularServiceImpl extends GenericService implements ParticularS
     }
 
     @Override
-    public Particular convertToEntity(ParticularRequest data) {
-        Particular particular = new Particular();
+    public Patient convertToEntity(PatientRequest data) {
+        Patient particular = new Patient();
 
         particular.setIdentification(data.getIdentification());
         particular.setName(data.getName());
@@ -236,7 +235,7 @@ public class ParticularServiceImpl extends GenericService implements ParticularS
     }
 
     @Override
-    public ParticularResponse convertToDto(Particular entity) {
+    public ParticularResponse convertToDto(Patient entity) {
         ParticularResponse data = new ParticularResponse();
 
         data.setId(entity.getId());

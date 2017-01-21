@@ -9,7 +9,7 @@ import java.io.Serializable;
  * @param <E> Entity type
  * @param <D> Data Transfer Object type
  *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public interface DtoConvert<E extends Serializable, D> {

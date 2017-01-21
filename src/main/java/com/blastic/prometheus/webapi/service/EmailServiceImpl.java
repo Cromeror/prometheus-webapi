@@ -17,8 +17,7 @@ import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 
 /**
- *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public class EmailServiceImpl extends GenericService implements EmailService,
