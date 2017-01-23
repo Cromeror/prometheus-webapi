@@ -4,7 +4,7 @@ import com.blastic.prometheus.webapi.database.entity.Gender;
 import com.blastic.prometheus.webapi.model.OrderType;
 import com.blastic.prometheus.webapi.model.dto.ListResponse;
 import com.blastic.prometheus.webapi.model.dto.PatientRequest;
-import com.blastic.prometheus.webapi.model.dto.ParticularResponse;
+import com.blastic.prometheus.webapi.model.dto.PatientResponse;
 
 /**
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
@@ -18,7 +18,7 @@ public interface PatientService extends Service {
      * @param data Particular entity information
      * @return saved entity
      */
-    ParticularResponse add(PatientRequest data);
+    PatientResponse add(PatientRequest data);
 
     /**
      * Get Particular client information by id provided
@@ -26,7 +26,7 @@ public interface PatientService extends Service {
      * @param id entity identifier to search
      * @return searched entity
      */
-    ParticularResponse get(Long id);
+    PatientResponse get(Long id);
 
     /**
      * Get all Particular clients
@@ -39,7 +39,7 @@ public interface PatientService extends Service {
      * @param gender Filter gender
      * @return Particular entities list
      */
-    ListResponse<ParticularResponse> getAll(int start, int size, String search,
+    ListResponse<PatientResponse> getAll(int start, int size, String search,
             String orderBy, OrderType orderType, Gender gender);
 
     /**
@@ -49,7 +49,7 @@ public interface PatientService extends Service {
      * @param data Particular entity information
      * @return saved entity
      */
-    ParticularResponse update(Long id, PatientRequest data);
+    PatientResponse update(Long id, PatientRequest data);
 
     /**
      * Delete Particular client entity by id provided
@@ -57,6 +57,6 @@ public interface PatientService extends Service {
      * @param id entity identifier to delete
      * @return deleted entity
      */
-    ParticularResponse delete(Long id);
+    PatientResponse delete(Long id);
 
 }

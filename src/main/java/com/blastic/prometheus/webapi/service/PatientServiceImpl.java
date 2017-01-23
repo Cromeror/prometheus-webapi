@@ -19,7 +19,7 @@ import com.blastic.prometheus.webapi.model.dto.ErrorMessageData;
 import com.blastic.prometheus.webapi.model.dto.ListResponse;
 import com.blastic.prometheus.webapi.model.dto.NeighborhoodResponse;
 import com.blastic.prometheus.webapi.model.dto.PatientRequest;
-import com.blastic.prometheus.webapi.model.dto.ParticularResponse;
+import com.blastic.prometheus.webapi.model.dto.PatientResponse;
 import com.blastic.prometheus.webapi.model.dto.PhoneRequest;
 import com.blastic.prometheus.webapi.model.dto.PhoneResponse;
 import com.blastic.prometheus.webapi.service.exception.ServiceException;
@@ -36,7 +36,7 @@ import com.blastic.prometheus.webapi.database.dao.PatientDao;
  * @version 1.0
  */
 public class PatientServiceImpl extends GenericService implements PatientService,
-        DtoConverter<Patient, PatientRequest, ParticularResponse> {
+        DtoConverter<Patient, PatientRequest, PatientResponse> {
 
     private final PatientDao particularDao = EntityControllerFactory
             .getPatientController();
@@ -51,7 +51,7 @@ public class PatientServiceImpl extends GenericService implements PatientService
             .getNeighborhoodController();
 
     @Override
-    public ParticularResponse add(PatientRequest data) {
+    public PatientResponse add(PatientRequest data) {
         if (data == null)
             throw new BadRequestException(config
                     .getString("particular.is_null"));
@@ -128,7 +128,7 @@ public class PatientServiceImpl extends GenericService implements PatientService
     }
 
     @Override
-    public ParticularResponse get(Long id) {
+    public PatientResponse get(Long id) {
         return convertToDto(getEntity(id));
     }
 
@@ -152,14 +152,14 @@ public class PatientServiceImpl extends GenericService implements PatientService
     }
 
     @Override
-    public ListResponse<ParticularResponse> getAll(int start, int size, String search,
+    public ListResponse<PatientResponse> getAll(int start, int size, String search,
             String orderBy, OrderType orderType, Gender gender) {
         if (start < 0)
             throw new BadRequestException(config.getString("pagination.start"));
         if (size <= 0)
             throw new BadRequestException(config.getString("pagination.size"));
 
-        List<ParticularResponse> response = new ArrayList<>();
+        List<PatientResponse> response = new ArrayList<>();
         List<Patient> result = particularDao.findAll(start, size, search,
                 orderBy, orderType, gender);
 
@@ -172,7 +172,7 @@ public class PatientServiceImpl extends GenericService implements PatientService
     }
 
     @Override
-    public ParticularResponse update(Long id, PatientRequest data) {
+    public PatientResponse update(Long id, PatientRequest data) {
         Patient entity = getEntity(id);
 
         if (!TextUtil.isEmpty(data.getIdentification()) && !data
@@ -195,21 +195,26 @@ public class PatientServiceImpl extends GenericService implements PatientService
     }
 
     @Override
-    public ParticularResponse delete(Long id) {
-        ParticularResponse data = get(id);
+    public PatientResponse delete(Long id) {
+        PatientResponse data = get(id);
         particularDao.delete(id);
         return data;
     }
 
     @Override
     public Patient convertToEntity(PatientRequest data) {
-        Patient particular = new Patient();
+        Patient patient = new Patient();
 
-        particular.setIdentification(data.getIdentification());
-        particular.setName(data.getName());
-        particular.setLastName(data.getLastName());
-        particular.setBirthday(data.getBirthday());
-        particular.setGender(data.getGender());
+        patient.setIdentification(data.getIdentification());
+        patient.setName(data.getName());
+        patient.setLastName(data.getLastName());
+        patient.setBirthday(data.getBirthday());
+        patient.setGender(data.getGender());
+        patient.setAcademicLevel(data.getAcademicLevel());
+        patient.setCivilStatus(data.getCivilStatus());
+        patient.setMilitaryStatus(data.getMilitaryStatus());
+        patient.setNationality(data.getNationality());
+        patient.setOccupation(data.getOccupation());
 
         for (AddressRequest adata : data.getAddresses()) {
             Neighborhood neighborhood = neighborhoodDao.find(adata
@@ -218,25 +223,24 @@ public class PatientServiceImpl extends GenericService implements PatientService
                 throw new NotFoundException(String.format(config
                         .getString("address.neighborhood_not_found"), adata
                         .getNeighborhood()));
-            particular.addAddress(new Address(adata.getTag(),
+            patient.addAddress(new Address(adata.getTag(),
                     adata.getResidentialAddress(), neighborhood));
         }
-
         for (EmailRequest edata : data.getEmails()) {
-            particular.addEmail(new Email(edata.getAddress()));
+            patient.addEmail(new Email(edata.getAddress()));
         }
 
         for (PhoneRequest pdata : data.getPhones()) {
-            particular.addPhone(new Phone(pdata.getTag(), pdata.getNumber(),
+            patient.addPhone(new Phone(pdata.getTag(), pdata.getNumber(),
                     pdata.getPhoneType()));
         }
 
-        return particular;
+        return patient;
     }
 
     @Override
-    public ParticularResponse convertToDto(Patient entity) {
-        ParticularResponse data = new ParticularResponse();
+    public PatientResponse convertToDto(Patient entity) {
+        PatientResponse data = new PatientResponse();
 
         data.setId(entity.getId());
         data.setIdentification(entity.getIdentification());
@@ -244,6 +248,11 @@ public class PatientServiceImpl extends GenericService implements PatientService
         data.setLastName(entity.getLastName());
         data.setGender(entity.getGender());
         data.setBirthday(entity.getBirthday());
+        data.setAcademicLevel(entity.getAcademicLevel());
+        data.setCivilStatus(entity.getCivilStatus());
+        data.setMilitaryStatus(entity.getMilitaryStatus());
+        data.setNationality(entity.getNationality());
+        data.setOccupation(entity.getOccupation());
 
         if (entity.getAddresses() != null) {
             data.setAddresses(new ArrayList<AddressResponse>());

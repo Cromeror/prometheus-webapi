@@ -2,7 +2,7 @@ package com.blastic.prometheus.webapi.rest.resource;
 
 import com.blastic.prometheus.webapi.model.dto.ListResponse;
 import com.blastic.prometheus.webapi.model.dto.PatientRequest;
-import com.blastic.prometheus.webapi.model.dto.ParticularResponse;
+import com.blastic.prometheus.webapi.model.dto.PatientResponse;
 import com.blastic.prometheus.webapi.rest.bean.PatientBean;
 import com.blastic.prometheus.webapi.service.ServiceFactory;
 import java.net.URI;
@@ -39,7 +39,7 @@ public class PatientResource {
             .getParticularService();
 
     @GET
-    public ListResponse<ParticularResponse> getAll(@BeanParam PatientBean bean) {
+    public ListResponse<PatientResponse> getAll(@BeanParam PatientBean bean) {
         if (bean.getSize() == null)
             bean.setSize(20);
         service.configurate(Collections.list(request.getLocales()));
@@ -49,7 +49,7 @@ public class PatientResource {
 
     @GET
     @Path("{id}")
-    public ParticularResponse get(@PathParam("id") Long id) {
+    public PatientResponse get(@PathParam("id") Long id) {
         service.configurate(Collections.list(request.getLocales()));
         return service.get(id);
     }
@@ -57,7 +57,7 @@ public class PatientResource {
     @POST
     public Response post(PatientRequest data, @Context UriInfo uriInfo) {
         service.configurate(Collections.list(request.getLocales()));
-        ParticularResponse newParticular = service.add(data);
+        PatientResponse newParticular = service.add(data);
         URI location = uriInfo.getAbsolutePathBuilder().path(newParticular
                 .getId().toString()).build();
         return Response.created(location).entity(newParticular).build();
@@ -65,7 +65,7 @@ public class PatientResource {
 
     @PUT
     @Path("{id}")
-    public ParticularResponse put(@PathParam("id") Long id,
+    public PatientResponse put(@PathParam("id") Long id,
             PatientRequest data) {
         service.configurate(Collections.list(request.getLocales()));
         return service.update(id, data);
@@ -73,7 +73,7 @@ public class PatientResource {
 
     @DELETE
     @Path("{id}")
-    public ParticularResponse delete(@PathParam("id") Long id) {
+    public PatientResponse delete(@PathParam("id") Long id) {
         service.configurate(Collections.list(request.getLocales()));
         return service.delete(id);
     }
