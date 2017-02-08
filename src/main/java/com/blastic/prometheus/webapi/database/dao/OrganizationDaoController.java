@@ -17,8 +17,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public class OrganizationDaoController extends EntityDao<Organization, Long>
@@ -116,5 +115,11 @@ public class OrganizationDaoController extends EntityDao<Organization, Long>
         }
 
         return null;
+    }
+
+    @Override
+    public Organization findByNit(String nit) {
+        return executeNamedQuery("organization.findByNit",
+                new Parameter("nit", nit));
     }
 }

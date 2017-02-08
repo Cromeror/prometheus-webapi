@@ -18,8 +18,7 @@ import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
- *
- * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
+ * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
 public class PatientDaoController extends EntityDao<Patient, Long>
@@ -75,9 +74,9 @@ public class PatientDaoController extends EntityDao<Patient, Long>
     }
 
     @Override
-    public Patient findByCustomerId(Long id) {
-        return executeNamedQuery("particular.findByCustomerId",
-                new Parameter("customerId", id));
+    public List<Patient> findByOrganizationId(Long id, int start, int size) {
+        return executeNamedQueryForList("patient.findByOrganizationId", start,
+                size, new Parameter("orgId", id));
     }
 
     @Override

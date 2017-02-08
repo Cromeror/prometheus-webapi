@@ -5,6 +5,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -15,6 +17,10 @@ import javax.persistence.Table;
 @Entity
 @Table(name = "PATIENT")
 @PrimaryKeyJoinColumn(referencedColumnName = "PERSON_ID")
+@NamedQueries(
+        @NamedQuery(name = "patient.findByOrganizationId",
+                query = "SELECT p FROM Patient p WHERE p.organization.id = :orgId")
+)
 public class Patient extends Person {
 
     @Column(name = "NATIONALITY", length = 20)

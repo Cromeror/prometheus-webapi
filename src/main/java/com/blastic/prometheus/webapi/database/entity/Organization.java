@@ -10,6 +10,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import org.hibernate.annotations.Fetch;
@@ -21,6 +23,10 @@ import org.hibernate.annotations.FetchMode;
  */
 @Entity
 @Table(name = "ORGANIZATION")
+@NamedQueries(
+        @NamedQuery(name = "organization.findByNit",
+                query = "SELECT o FROM Organization o WHERE o.nit = :nit")
+)
 public class Organization implements Serializable {
 
     @Id

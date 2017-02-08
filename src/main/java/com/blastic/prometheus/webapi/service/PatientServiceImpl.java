@@ -31,6 +31,7 @@ import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import com.blastic.prometheus.webapi.database.dao.PatientDao;
+import com.blastic.prometheus.webapi.database.dao.PersonDao;
 import com.blastic.prometheus.webapi.database.entity.Organization;
 
 /**
@@ -81,6 +82,12 @@ public class PatientServiceImpl extends GenericService implements PatientService
             throw new BadRequestException(config
                     .getString("particular.is_null"));
         else {
+            if (data.getIdentification() != null) {
+                PersonDao personDao = EntityControllerFactory.getPersonController();
+                if (personDao.findByIdentification(data.getIdentification()) != null) {
+                    throw new BadRequestException(config.getString("person.identification_exist"));
+                }
+            }
             ErrorMessageData errors = new ErrorMessageData();
             if (data.getName() == null)
                 errors.addMessage(config.getString("person.name_required"));
@@ -170,7 +177,7 @@ public class PatientServiceImpl extends GenericService implements PatientService
         if (id == null || id <= 0)
             throw new BadRequestException(config.getString("person.id_required"));
 
-        Patient patient = patientDao.findByCustomerId(id);
+        Patient patient = patientDao.find(id);
 
         if (patient == null)
             throw new NotFoundException(String.format(config
@@ -309,5 +316,18 @@ public class PatientServiceImpl extends GenericService implements PatientService
         }
 
         return data;
+    }
+
+    @Override
+    public ListResponse<PatientResponse> getByOrganization(Long id, int start,
+            int size) {
+        List<PatientResponse> responses = new ArrayList<>();
+
+        for (Patient patient : patientDao.findByOrganizationId(id, start, size)) {
+            responses.add(convertToDto(patient));
+        }
+
+        return new ListResponse<>(0, responses);
+
     }
 }

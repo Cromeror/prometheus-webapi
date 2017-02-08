@@ -13,15 +13,15 @@ import com.blastic.prometheus.webapi.model.dto.PatientResponse;
 public interface PatientService extends Service {
 
     /**
-     * Create new Particular client from the given data
+     * Create new patient from the given data
      *
-     * @param data Particular entity information
+     * @param data Patient entity information
      * @return saved entity
      */
     PatientResponse add(PatientRequest data);
 
     /**
-     * Get Particular client information by id provided
+     * Get patient information by id provided
      *
      * @param id entity identifier to search
      * @return searched entity
@@ -29,7 +29,17 @@ public interface PatientService extends Service {
     PatientResponse get(Long id);
 
     /**
-     * Get all Particular clients
+     * Get patient information by id provided
+     *
+     * @param id entity identifier to search
+     * @param start
+     * @param size
+     * @return searched entity
+     */
+    ListResponse<PatientResponse> getByOrganization(Long id, int start, int size);
+
+    /**
+     * Get all patients
      *
      * @param start initial index
      * @param size size of list
@@ -37,22 +47,22 @@ public interface PatientService extends Service {
      * @param orderBy Atributte to order
      * @param orderType Order type to list
      * @param gender Filter gender
-     * @return Particular entities list
+     * @return Patient entities list
      */
     ListResponse<PatientResponse> getAll(int start, int size, String search,
             String orderBy, OrderType orderType, Gender gender);
 
     /**
-     * Update information of Particular client by id provided
+     * Update information of patient by id provided
      *
      * @param id entity identifier to update
-     * @param data Particular entity information
+     * @param data Patient entity information
      * @return saved entity
      */
     PatientResponse update(Long id, PatientRequest data);
 
     /**
-     * Delete Particular client entity by id provided
+     * Delete Patient client entity by id provided
      *
      * @param id entity identifier to delete
      * @return deleted entity

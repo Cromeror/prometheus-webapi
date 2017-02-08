@@ -41,6 +41,15 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
             throw new BadRequestException(config
                     .getString("organization.is_null"));
         } else {
+            if (TextUtil.isEmpty(data.getNit())) {
+                throw new BadRequestException(
+                        config.getString("organization.nit"));
+            } else if (organizationDao.findByNit(data.getNit()) != null) {
+                String msg = String.format(
+                        config.getString("organization.nit_used"), data.getNit());
+                throw new BadRequestException(msg);
+            }
+
             ErrorMessageData errors = new ErrorMessageData();
             if (data.getName() == null)
                 errors.addMessage(config

@@ -33,10 +33,13 @@ import com.blastic.prometheus.webapi.service.PatientService;
 public class PatientResource {
 
     @Context
-    private final HttpServletRequest request;
+    private HttpServletRequest request;
 
     private final PatientService service = ServiceFactory
             .getPatientService();
+
+    public PatientResource() {
+    }
 
     public PatientResource(HttpServletRequest request) {
         this.request = request;
@@ -48,10 +51,11 @@ public class PatientResource {
         if (bean.getSize() == null)
             bean.setSize(20);
         service.configurate(Collections.list(request.getLocales()));
-        
+
         if (orgId != null)
-            return null;
-        
+            return service.getByOrganization(orgId, bean.getStart(),
+                    bean.getSize());
+
         return service.getAll(bean.getStart(), bean.getSize(), bean.getSearch(),
                 bean.getOrderBy(), bean.getOrderType(), bean.getGender());
     }
