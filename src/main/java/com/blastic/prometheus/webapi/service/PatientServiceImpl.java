@@ -212,7 +212,6 @@ public class PatientServiceImpl extends GenericService implements PatientService
         patient.setGender(data.getGender());
         patient.setAcademicLevel(data.getAcademicLevel());
         patient.setCivilStatus(data.getCivilStatus());
-        patient.setMilitaryStatus(data.getMilitaryStatus());
         patient.setNationality(data.getNationality());
         patient.setOccupation(data.getOccupation());
 
@@ -250,7 +249,6 @@ public class PatientServiceImpl extends GenericService implements PatientService
         data.setBirthday(entity.getBirthday());
         data.setAcademicLevel(entity.getAcademicLevel());
         data.setCivilStatus(entity.getCivilStatus());
-        data.setMilitaryStatus(entity.getMilitaryStatus());
         data.setNationality(entity.getNationality());
         data.setOccupation(entity.getOccupation());
 

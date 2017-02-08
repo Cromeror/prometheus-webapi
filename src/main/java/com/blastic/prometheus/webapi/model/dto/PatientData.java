@@ -3,7 +3,6 @@ package com.blastic.prometheus.webapi.model.dto;
 import com.blastic.prometheus.webapi.database.entity.AcademicLevel;
 import com.blastic.prometheus.webapi.database.entity.CivilStatus;
 import com.blastic.prometheus.webapi.database.entity.Gender;
-import com.blastic.prometheus.webapi.database.entity.MilitaryStatus;
 import java.util.Calendar;
 
 /**
@@ -30,8 +29,6 @@ public class PatientData {
 
     protected AcademicLevel academicLevel;
 
-    protected MilitaryStatus militaryStatus;
-
     protected String occupation;
 
     public PatientData() {
@@ -40,7 +37,7 @@ public class PatientData {
     public PatientData(String identification, String name, String lastName,
             Gender gender, Calendar birthday, String observations,
             String nationality, CivilStatus civilStatus,
-            AcademicLevel academicLevel, MilitaryStatus militaryStatus,
+            AcademicLevel academicLevel,
             String occupation) {
         this.identification = identification;
         this.name = name;
@@ -51,7 +48,6 @@ public class PatientData {
         this.nationality = nationality;
         this.civilStatus = civilStatus;
         this.academicLevel = academicLevel;
-        this.militaryStatus = militaryStatus;
         this.occupation = occupation;
     }
 
@@ -125,14 +121,6 @@ public class PatientData {
 
     public void setAcademicLevel(AcademicLevel academicLevel) {
         this.academicLevel = academicLevel;
-    }
-
-    public MilitaryStatus getMilitaryStatus() {
-        return militaryStatus;
-    }
-
-    public void setMilitaryStatus(MilitaryStatus militaryStatus) {
-        this.militaryStatus = militaryStatus;
     }
 
     public String getOccupation() {

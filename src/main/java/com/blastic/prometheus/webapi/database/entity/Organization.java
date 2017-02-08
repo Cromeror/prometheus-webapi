@@ -20,8 +20,8 @@ import org.hibernate.annotations.FetchMode;
  * @version 1.0
  */
 @Entity
-@Table(name = "ESTABLISHMENT")
-public class Establishment implements Serializable {
+@Table(name = "ORGANIZATION")
+public class Organization implements Serializable {
 
     @Id
     @Column(name = "ID")
@@ -35,14 +35,14 @@ public class Establishment implements Serializable {
     private String name;
 
     @Fetch(FetchMode.SUBSELECT)
-    @OneToMany(mappedBy = "establishment", cascade = CascadeType.ALL,
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL,
             fetch = FetchType.EAGER)
     private List<Address> addresses;
 
-    public Establishment() {
+    public Organization() {
     }
 
-    public Establishment(String nit, String name) {
+    public Organization(String nit, String name) {
         this.nit = nit;
         this.name = name;
     }
@@ -86,8 +86,8 @@ public class Establishment implements Serializable {
         if (address != null) {
             this.addresses.add(address);
 
-            if (address.getEstablishment() != this)
-                address.setEstablishment(this);
+            if (address.getOrganization() != this)
+                address.setOrganization(this);
         }
     }
 }

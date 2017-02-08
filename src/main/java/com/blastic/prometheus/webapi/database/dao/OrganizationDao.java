@@ -1,7 +1,7 @@
 package com.blastic.prometheus.webapi.database.dao;
 
 import com.blastic.prometheus.webapi.database.DataAccessObject;
-import com.blastic.prometheus.webapi.database.entity.Establishment;
+import com.blastic.prometheus.webapi.database.entity.Organization;
 import com.blastic.prometheus.webapi.model.OrderType;
 import java.util.List;
 
@@ -10,8 +10,8 @@ import java.util.List;
  * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
  * @version 1.0
  */
-public interface EstablishmentDao 
-        extends DataAccessObject<Establishment, Long> {
+public interface OrganizationDao 
+        extends DataAccessObject<Organization, Long> {
     
     /**
      * Return a filter establishment list by string 
@@ -23,16 +23,16 @@ public interface EstablishmentDao
      * @param orderType Order type to list
      * @return Filter list
      */
-    List<Establishment> findAll(int start, int size, String search, 
+    List<Organization> findAll(int start, int size, String search, 
             String orderBy, OrderType orderType);
     
     /**
      * Returns a establishment entity by customer ID
      * 
      * @param id Customer ID
-     * @return Establishment entity
+     * @return Organization entity
      */
-    Establishment findByCustomerId(Long id);
+    Organization findByCustomerId(Long id);
     
     /**
      * Returns the find all result count 

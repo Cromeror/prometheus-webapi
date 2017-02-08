@@ -2,11 +2,10 @@ package com.blastic.prometheus.webapi.service;
 
 import com.blastic.prometheus.webapi.database.EntityControllerFactory;
 import com.blastic.prometheus.webapi.database.dao.AddressDao;
-import com.blastic.prometheus.webapi.database.dao.EstablishmentDao;
 import com.blastic.prometheus.webapi.database.dao.NeighborhoodDao;
 import com.blastic.prometheus.webapi.database.dao.PersonDao;
 import com.blastic.prometheus.webapi.database.entity.Address;
-import com.blastic.prometheus.webapi.database.entity.Establishment;
+import com.blastic.prometheus.webapi.database.entity.Organization;
 import com.blastic.prometheus.webapi.database.entity.Neighborhood;
 import com.blastic.prometheus.webapi.database.entity.Person;
 import com.blastic.prometheus.webapi.model.dto.AddressRequest;
@@ -20,6 +19,7 @@ import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
+import com.blastic.prometheus.webapi.database.dao.OrganizationDao;
 
 /**
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
@@ -34,7 +34,7 @@ public class AddressServiceImpl extends GenericService implements AddressService
     private final PersonDao personDao = EntityControllerFactory
             .getPersonController();
 
-    private final EstablishmentDao establishmentDao = EntityControllerFactory
+    private final OrganizationDao establishmentDao = EntityControllerFactory
             .getEstablishmentDao();
 
     private final NeighborhoodDao neighborhoodDao = EntityControllerFactory
@@ -80,12 +80,12 @@ public class AddressServiceImpl extends GenericService implements AddressService
                 address.setPerson(person);
                 break;
             case ESTABLISHMENT:
-                Establishment establishment = establishmentDao.find(id);
+                Organization establishment = establishmentDao.find(id);
                 if (establishment == null) {
                     throw new NotFoundException(String.format(config
                             .getString("establishment.not_found"), id));
                 }
-                address.setEstablishment(establishment);
+                address.setOrganization(establishment);
                 break;
         }
 

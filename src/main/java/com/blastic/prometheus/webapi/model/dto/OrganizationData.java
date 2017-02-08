@@ -4,7 +4,7 @@ package com.blastic.prometheus.webapi.model.dto;
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public class EstablishmentData {
+public class OrganizationData {
 
     private String nit;
 
@@ -12,10 +12,10 @@ public class EstablishmentData {
 
     private String observations;
 
-    public EstablishmentData() {
+    public OrganizationData() {
     }
 
-    public EstablishmentData(String nit, String name, String observations) {
+    public OrganizationData(String nit, String name, String observations) {
         this.nit = nit;
         this.name = name;
         this.observations = observations;

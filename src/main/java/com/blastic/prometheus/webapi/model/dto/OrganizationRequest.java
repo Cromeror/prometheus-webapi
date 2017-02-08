@@ -6,14 +6,14 @@ import java.util.List;
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public class EstablishmentRequest extends EstablishmentData{
+public class OrganizationRequest extends OrganizationData{
     
     private List<AddressRequest> addresses;
 
-    public EstablishmentRequest() {
+    public OrganizationRequest() {
     }
 
-    public EstablishmentRequest(String nit, String name, String observations) {
+    public OrganizationRequest(String nit, String name, String observations) {
         super(nit, name, observations);
     }
 

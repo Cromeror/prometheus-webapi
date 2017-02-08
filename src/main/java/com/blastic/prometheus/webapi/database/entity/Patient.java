@@ -24,9 +24,6 @@ public class Patient extends Person {
     @Column(name = "ACADEMIC_LEVEL")
     private AcademicLevel academicLevel;
 
-    @Column(name = "MILITARY_STATUS")
-    private MilitaryStatus militaryStatus;
-
     @Column(name = "OCCUPATION", length = 20)
     private String occupation;
 
@@ -34,14 +31,13 @@ public class Patient extends Person {
     }
 
     public Patient(String nationality, CivilStatus civilStatus,
-            AcademicLevel academicLevel, MilitaryStatus militaryStatus,
+            AcademicLevel academicLevel,
             String occupation, String identification, String name,
             String lastName, Gender gender, Calendar birthday) {
         super(identification, name, lastName, gender, birthday);
         this.nationality = nationality;
         this.civilStatus = civilStatus;
         this.academicLevel = academicLevel;
-        this.militaryStatus = militaryStatus;
         this.occupation = occupation;
     }
 
@@ -67,14 +63,6 @@ public class Patient extends Person {
 
     public void setAcademicLevel(AcademicLevel academicLevel) {
         this.academicLevel = academicLevel;
-    }
-
-    public MilitaryStatus getMilitaryStatus() {
-        return militaryStatus;
-    }
-
-    public void setMilitaryStatus(MilitaryStatus militaryStatus) {
-        this.militaryStatus = militaryStatus;
     }
 
     public String getOccupation() {

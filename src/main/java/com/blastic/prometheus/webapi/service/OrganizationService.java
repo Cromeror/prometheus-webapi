@@ -1,15 +1,15 @@
 package com.blastic.prometheus.webapi.service;
 
 import com.blastic.prometheus.webapi.model.OrderType;
-import com.blastic.prometheus.webapi.model.dto.EstablishmentRequest;
-import com.blastic.prometheus.webapi.model.dto.EstablishmentResponse;
+import com.blastic.prometheus.webapi.model.dto.OrganizationRequest;
+import com.blastic.prometheus.webapi.model.dto.OrganizationResponse;
 import com.blastic.prometheus.webapi.model.dto.ListResponse;
 
 /**
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public interface EstablishmentService extends Service{
+public interface OrganizationService extends Service{
 
     /**
      * Create new Establishment client from the given data
@@ -17,7 +17,7 @@ public interface EstablishmentService extends Service{
      * @param data information of Establishment entity
      * @return saved entity
      */
-    EstablishmentResponse add(EstablishmentRequest data);
+    OrganizationResponse add(OrganizationRequest data);
 
     /**
      * Get Establishment client information by id provided
@@ -25,7 +25,7 @@ public interface EstablishmentService extends Service{
      * @param id entity identifier to search
      * @return searched entity
      */
-    EstablishmentResponse get(Long id);
+    OrganizationResponse get(Long id);
 
     /**
      * Get all Establishment clients
@@ -37,7 +37,7 @@ public interface EstablishmentService extends Service{
      * @param orderType Order type to list
      * @return list of Establishment entities
      */
-    ListResponse<EstablishmentResponse> getAll(int start, int size, String search, 
+    ListResponse<OrganizationResponse> getAll(int start, int size, String search, 
             String orderBy, OrderType orderType);
 
     /**
@@ -47,7 +47,7 @@ public interface EstablishmentService extends Service{
      * @param data information of Establishment entity
      * @return saved entity
      */
-    EstablishmentResponse update(Long id, EstablishmentRequest data);
+    OrganizationResponse update(Long id, OrganizationRequest data);
 
     /**
      * Establishment Particular client entity by id provided
@@ -55,5 +55,5 @@ public interface EstablishmentService extends Service{
      * @param id entity identifier to delete
      * @return deleted entity
      */
-    EstablishmentResponse delete(Long id);
+    OrganizationResponse delete(Long id);
 }

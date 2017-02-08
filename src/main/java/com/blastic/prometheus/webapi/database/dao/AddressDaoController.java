@@ -32,8 +32,8 @@ public class AddressDaoController extends EntityDao<Address, Long>
     @Override
     public List<Address> getAllByEstablishmentId(Long establishmentId) {
         return executeNamedQueryForList(
-                "address.findAllByEstablishmentId",
-                new Parameter("establishmentId", establishmentId));
+                "address.findAllByOrganizationId",
+                new Parameter("organizationId", establishmentId));
     }
 
     @Override
@@ -44,9 +44,9 @@ public class AddressDaoController extends EntityDao<Address, Long>
 
     @Override
     public Address getByEstablishmentId(Long id, Long establishmentId) {
-        return executeNamedQuery("address.findByEstablishmentId",
+        return executeNamedQuery("address.findByOrganizationId",
                 new Parameter("id", id),
-                new Parameter("establishmentId", establishmentId));
+                new Parameter("organizationId", establishmentId));
     }
 
 }

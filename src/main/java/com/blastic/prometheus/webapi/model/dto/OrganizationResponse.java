@@ -7,17 +7,17 @@ import java.util.List;
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public class EstablishmentResponse extends EstablishmentData {
+public class OrganizationResponse extends OrganizationData {
 
     private Long id;
 
     private List<AddressResponse> addresses;
 
-    public EstablishmentResponse() {
+    public OrganizationResponse() {
         this.addresses = new ArrayList<>();
     }
 
-    public EstablishmentResponse(Long id, String nit, String name,
+    public OrganizationResponse(Long id, String nit, String name,
             String observations) {
         super(nit, name, observations);
         this.id = id;

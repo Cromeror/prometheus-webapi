@@ -24,8 +24,8 @@ public class ServiceFactory {
         return new PhoneServiceImpl();
     }
 
-    public static EstablishmentService getEstablishmentService() {
-        return new EstablishmentServiceImpl();
+    public static OrganizationService getEstablishmentService() {
+        return new OrganizationServiceImpl();
     }
 
     public static PatientService getParticularService() {
@@ -35,5 +35,9 @@ public class ServiceFactory {
     public static NeighborhoodService getNeighborhoodService() {
         return new NeighborhoodServiceImpl(EntityControllerFactory
                 .getNeighborhoodController());
+    }
+
+    public static OrganizationService getOrganizationService() {
+        return new OrganizationServiceImpl();
     }
 }

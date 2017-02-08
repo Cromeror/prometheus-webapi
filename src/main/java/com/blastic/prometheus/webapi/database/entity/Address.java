@@ -22,16 +22,19 @@ import javax.persistence.Table;
 @Table(name = "ADDRESS")
 @NamedQueries({
     @NamedQuery(name = "address.findAllByPersonId",
-            query = "SELECT a FROM Address a WHERE a.person.id = :personId"),
-    @NamedQuery(name = "address.findAllByEstablishmentId",
+            query = "SELECT a FROM Address a WHERE a.person.id = :personId")
+    ,
+    @NamedQuery(name = "address.findAllByOrganizationId",
             query = "SELECT a FROM Address a WHERE "
-            + "a.establishment.id = :establishmentId"),
+            + "a.organization.id = :organizationId")
+    ,
     @NamedQuery(name = "address.findByPersonId",
             query = "SELECT a FROM Address a WHERE a.id = :id "
-            + "AND a.person.id = :personId"),
-    @NamedQuery(name = "address.findByEstablishmentId",
+            + "AND a.person.id = :personId")
+    ,
+    @NamedQuery(name = "address.findByOrganizationId",
             query = "SELECT a FROM Address a WHERE a.id = :id AND "
-            + "a.establishment.id = :establishmentId")
+            + "a.organization.id = :organizationId")
 })
 public class Address implements Serializable {
 
@@ -49,19 +52,19 @@ public class Address implements Serializable {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "PERSON_ID")
     private Person person;
-    
+
     @OneToOne
     @JoinColumn(name = "NEIGHBORHOOD")
     private Neighborhood neighborhood;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "ESTABLISHMENT_ID")
-    private Establishment establishment;
+    @JoinColumn(name = "ORGANIZATION_ID")
+    private Organization organization;
 
     public Address() {
     }
 
-    public Address(String tag, String residentialAddress, 
+    public Address(String tag, String residentialAddress,
             Neighborhood neighborhood) {
         this.tag = tag;
         this.residentialAddress = residentialAddress;
@@ -107,7 +110,7 @@ public class Address implements Serializable {
     public void setNeighborhood(Neighborhood neighborhood) {
         this.neighborhood = neighborhood;
     }
-    
+
     public Person getPerson() {
         return person;
     }
@@ -120,15 +123,15 @@ public class Address implements Serializable {
         }
     }
 
-    public Establishment getEstablishment() {
-        return establishment;
+    public Organization getOrganization() {
+        return organization;
     }
 
-    public void setEstablishment(Establishment establishment) {
-        this.establishment = establishment;
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
 
-        if (!establishment.getAddresses().contains(this))
-            establishment.addAddress(this);
+        if (!organization.getAddresses().contains(this))
+            organization.addAddress(this);
     }
 
 }

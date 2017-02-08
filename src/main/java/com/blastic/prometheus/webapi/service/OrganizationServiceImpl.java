@@ -1,17 +1,16 @@
 package com.blastic.prometheus.webapi.service;
 
 import com.blastic.prometheus.webapi.database.EntityControllerFactory;
-import com.blastic.prometheus.webapi.database.dao.EstablishmentDao;
 import com.blastic.prometheus.webapi.database.dao.NeighborhoodDao;
 import com.blastic.prometheus.webapi.database.entity.Address;
-import com.blastic.prometheus.webapi.database.entity.Establishment;
+import com.blastic.prometheus.webapi.database.entity.Organization;
 import com.blastic.prometheus.webapi.database.entity.Neighborhood;
 import com.blastic.prometheus.webapi.model.OrderType;
 import com.blastic.prometheus.webapi.model.dto.AddressRequest;
 import com.blastic.prometheus.webapi.model.dto.AddressResponse;
 import com.blastic.prometheus.webapi.model.dto.ErrorMessageData;
-import com.blastic.prometheus.webapi.model.dto.EstablishmentRequest;
-import com.blastic.prometheus.webapi.model.dto.EstablishmentResponse;
+import com.blastic.prometheus.webapi.model.dto.OrganizationRequest;
+import com.blastic.prometheus.webapi.model.dto.OrganizationResponse;
 import com.blastic.prometheus.webapi.model.dto.ListResponse;
 import com.blastic.prometheus.webapi.model.dto.NeighborhoodResponse;
 import com.blastic.prometheus.webapi.service.exception.ServiceException;
@@ -21,22 +20,23 @@ import java.util.List;
 import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
+import com.blastic.prometheus.webapi.database.dao.OrganizationDao;
 
 /**
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
  * @version 1.0
  */
-public class EstablishmentServiceImpl extends GenericService implements EstablishmentService,
-        DtoConverter<Establishment, EstablishmentRequest, EstablishmentResponse> {
+public class OrganizationServiceImpl extends GenericService implements OrganizationService,
+        DtoConverter<Organization, OrganizationRequest, OrganizationResponse> {
 
-    private final EstablishmentDao establishmentDao = EntityControllerFactory
+    private final OrganizationDao establishmentDao = EntityControllerFactory
             .getEstablishmentDao();
 
     private final NeighborhoodDao neighborhoodDao = EntityControllerFactory
             .getNeighborhoodController();
 
     @Override
-    public EstablishmentResponse add(EstablishmentRequest data) {
+    public OrganizationResponse add(OrganizationRequest data) {
         if (data == null) {
             throw new BadRequestException(config
                     .getString("establishment.is_null"));
@@ -71,22 +71,22 @@ public class EstablishmentServiceImpl extends GenericService implements Establis
     }
 
     @Override
-    public EstablishmentResponse get(Long id) {
+    public OrganizationResponse get(Long id) {
         return convertToDto(getEntity(id));
     }
 
     /**
      * Returns the establishment entity by id provided
      *
-     * @param id Establishment id
+     * @param id Organization id
      * @return Searched entity
      */
-    public Establishment getEntity(Long id) {
+    public Organization getEntity(Long id) {
         if (id == null || id <= 0)
             throw new BadRequestException(config
                     .getString("establishment.id_required"));
 
-        Establishment establishment = establishmentDao.findByCustomerId(id);
+        Organization establishment = establishmentDao.findByCustomerId(id);
 
         if (establishment == null)
             throw new NotFoundException(String.format(config
@@ -96,17 +96,17 @@ public class EstablishmentServiceImpl extends GenericService implements Establis
     }
 
     @Override
-    public ListResponse<EstablishmentResponse> getAll(int start, int size,
+    public ListResponse<OrganizationResponse> getAll(int start, int size,
             String search, String orderBy, OrderType orderType) {
         if (start < 0)
             throw new BadRequestException(config.getString("pagination.start"));
         if (size <= 0)
             throw new BadRequestException(config.getString("pagination.size"));
 
-        List<EstablishmentResponse> response = new ArrayList<>();
-        List<Establishment> result = establishmentDao.findAll(start, size,
+        List<OrganizationResponse> response = new ArrayList<>();
+        List<Organization> result = establishmentDao.findAll(start, size,
                 search, orderBy, orderType);
-        for (Establishment establishment : result) {
+        for (Organization establishment : result) {
             response.add(convertToDto(establishment));
         }
 
@@ -114,14 +114,14 @@ public class EstablishmentServiceImpl extends GenericService implements Establis
     }
 
     @Override
-    public EstablishmentResponse update(Long id,
-            EstablishmentRequest data) {
+    public OrganizationResponse update(Long id,
+            OrganizationRequest data) {
 
         if (data == null)
             throw new BadRequestException(config
                     .getString("establishment.is_null"));
 
-        Establishment entity = getEntity(id);
+        Organization entity = getEntity(id);
 
         if (!TextUtil.isEmpty(data.getNit()) && !data.getNit()
                 .equalsIgnoreCase(entity.getNit()))
@@ -134,15 +134,15 @@ public class EstablishmentServiceImpl extends GenericService implements Establis
     }
 
     @Override
-    public EstablishmentResponse delete(Long id) {
-        EstablishmentResponse data = get(id);
+    public OrganizationResponse delete(Long id) {
+        OrganizationResponse data = get(id);
         establishmentDao.delete(id);
         return data;
     }
 
     @Override
-    public Establishment convertToEntity(EstablishmentRequest data) {
-        Establishment establishment = new Establishment(data.getNit(),
+    public Organization convertToEntity(OrganizationRequest data) {
+        Organization establishment = new Organization(data.getNit(),
                 data.getName());
 
         for (AddressRequest adata : data.getAddresses()) {
@@ -160,9 +160,9 @@ public class EstablishmentServiceImpl extends GenericService implements Establis
     }
 
     @Override
-    public EstablishmentResponse convertToDto(Establishment entity) {
-        EstablishmentResponse data
-                = new EstablishmentResponse(entity.getId(),
+    public OrganizationResponse convertToDto(Organization entity) {
+        OrganizationResponse data
+                = new OrganizationResponse(entity.getId(),
                         entity.getNit(), entity.getName(), null);
 
         for (Address address : entity.getAddresses()) {

@@ -1,7 +1,7 @@
 package com.blastic.prometheus.webapi.database.dao;
 
 import com.blastic.prometheus.webapi.database.EntityDao;
-import com.blastic.prometheus.webapi.database.entity.Establishment;
+import com.blastic.prometheus.webapi.database.entity.Organization;
 import com.blastic.prometheus.webapi.database.exception.DatabaseException;
 import com.blastic.prometheus.webapi.model.OrderType;
 import java.util.List;
@@ -21,33 +21,33 @@ import javax.persistence.criteria.Root;
  * @author Luis Alfonso Lenes Salas <luislenes02@gmail.com>
  * @version 1.0
  */
-public class EstablishmentDaoController extends EntityDao<Establishment, Long>
-        implements EstablishmentDao {
+public class OrganizationDaoController extends EntityDao<Organization, Long>
+        implements OrganizationDao {
 
     private static final Logger LOG = Logger
-            .getLogger(EstablishmentDaoController.class.getName());
+            .getLogger(OrganizationDaoController.class.getName());
 
-    private static final EstablishmentDaoController INSTANCE
-            = new EstablishmentDaoController();
+    private static final OrganizationDaoController INSTANCE
+            = new OrganizationDaoController();
 
-    private EstablishmentDaoController() {
-        super(Establishment.class);
+    private OrganizationDaoController() {
+        super(Organization.class);
     }
 
-    public static EstablishmentDaoController getInstance() {
+    public static OrganizationDaoController getInstance() {
         return INSTANCE;
     }
 
     @Override
-    public List<Establishment> findAll(int start, int size, String search,
+    public List<Organization> findAll(int start, int size, String search,
             String orderBy, OrderType orderType) {
         EntityManager manager = getEntityManager();
         try {
             CriteriaBuilder cb = manager.getCriteriaBuilder();
-            CriteriaQuery<Establishment> query = cb
-                    .createQuery(Establishment.class);
+            CriteriaQuery<Organization> query = cb
+                    .createQuery(Organization.class);
 
-            Root<Establishment> e = query.from(Establishment.class);
+            Root<Organization> e = query.from(Organization.class);
             query.select(e);
 
             Predicate restrictions = getRestrictions(manager, e, search);
@@ -64,7 +64,7 @@ public class EstablishmentDaoController extends EntityDao<Establishment, Long>
                 query.orderBy(order);
             }
 
-            TypedQuery<Establishment> typedQuery = manager
+            TypedQuery<Organization> typedQuery = manager
                     .createQuery(query);
 
             return size == 0 ? typedQuery.getResultList() : typedQuery
@@ -79,7 +79,7 @@ public class EstablishmentDaoController extends EntityDao<Establishment, Long>
     }
 
     @Override
-    public Establishment findByCustomerId(Long id) {
+    public Organization findByCustomerId(Long id) {
         return executeNamedQuery("establishment.findByCustomerId",
                 new Parameter("customerId", id));
     }
@@ -91,7 +91,7 @@ public class EstablishmentDaoController extends EntityDao<Establishment, Long>
             CriteriaBuilder cb = manager.getCriteriaBuilder();
             CriteriaQuery<Long> query = cb.createQuery(Long.class);
 
-            Root<Establishment> e = query.from(Establishment.class);
+            Root<Organization> e = query.from(Organization.class);
             query.select(cb.count(e));
 
             Predicate restrictions = getRestrictions(manager, e, search);
@@ -109,7 +109,7 @@ public class EstablishmentDaoController extends EntityDao<Establishment, Long>
     }
 
     private Predicate getRestrictions(EntityManager manager,
-            Root<Establishment> e, String search) {
+            Root<Organization> e, String search) {
         if (search != null) {
             CriteriaBuilder cb = manager.getCriteriaBuilder();
             Path<String> pathNit = e.get("nit");

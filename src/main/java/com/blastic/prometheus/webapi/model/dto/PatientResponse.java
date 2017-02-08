@@ -3,7 +3,6 @@ package com.blastic.prometheus.webapi.model.dto;
 import com.blastic.prometheus.webapi.database.entity.AcademicLevel;
 import com.blastic.prometheus.webapi.database.entity.CivilStatus;
 import com.blastic.prometheus.webapi.database.entity.Gender;
-import com.blastic.prometheus.webapi.database.entity.MilitaryStatus;
 import java.util.Calendar;
 import java.util.List;
 
@@ -29,10 +28,9 @@ public class PatientResponse extends PatientData {
             String identification, String name, String lastName, Gender gender,
             Calendar birthday, String observations, String nationality,
             CivilStatus civilStatus, AcademicLevel academicLevel,
-            MilitaryStatus militaryStatus, String occupation) {
+            String occupation) {
         super(identification, name, lastName, gender, birthday, observations,
-                nationality, civilStatus, academicLevel, militaryStatus,
-                occupation);
+                nationality, civilStatus, academicLevel, occupation);
         this.id = id;
         this.emails = emails;
         this.phones = phones;
