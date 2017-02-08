@@ -29,7 +29,7 @@ import com.blastic.prometheus.webapi.database.dao.OrganizationDao;
 public class OrganizationServiceImpl extends GenericService implements OrganizationService,
         DtoConverter<Organization, OrganizationRequest, OrganizationResponse> {
 
-    private final OrganizationDao establishmentDao = EntityControllerFactory
+    private final OrganizationDao organizationDao = EntityControllerFactory
             .getEstablishmentDao();
 
     private final NeighborhoodDao neighborhoodDao = EntityControllerFactory
@@ -39,12 +39,12 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
     public OrganizationResponse add(OrganizationRequest data) {
         if (data == null) {
             throw new BadRequestException(config
-                    .getString("establishment.is_null"));
+                    .getString("organization.is_null"));
         } else {
             ErrorMessageData errors = new ErrorMessageData();
             if (data.getName() == null)
                 errors.addMessage(config
-                        .getString("establishment.name_required"));
+                        .getString("organization.name_required"));
 
             if (data.getAddresses() != null) {
                 for (AddressRequest address : data.getAddresses()) {
@@ -67,7 +67,7 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
             }
         }
 
-        return convertToDto(establishmentDao.save(convertToEntity(data)));
+        return convertToDto(organizationDao.save(convertToEntity(data)));
     }
 
     @Override
@@ -84,13 +84,13 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
     public Organization getEntity(Long id) {
         if (id == null || id <= 0)
             throw new BadRequestException(config
-                    .getString("establishment.id_required"));
+                    .getString("organization.id_required"));
 
-        Organization establishment = establishmentDao.findByCustomerId(id);
+        Organization establishment = organizationDao.findByCustomerId(id);
 
         if (establishment == null)
             throw new NotFoundException(String.format(config
-                    .getString("establishment.not_found"), id));
+                    .getString("organization.not_found"), id));
 
         return establishment;
     }
@@ -104,13 +104,13 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
             throw new BadRequestException(config.getString("pagination.size"));
 
         List<OrganizationResponse> response = new ArrayList<>();
-        List<Organization> result = establishmentDao.findAll(start, size,
+        List<Organization> result = organizationDao.findAll(start, size,
                 search, orderBy, orderType);
         for (Organization establishment : result) {
             response.add(convertToDto(establishment));
         }
 
-        return new ListResponse<>(establishmentDao.findAllCount(search), response);
+        return new ListResponse<>(organizationDao.findAllCount(search), response);
     }
 
     @Override
@@ -119,7 +119,7 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
 
         if (data == null)
             throw new BadRequestException(config
-                    .getString("establishment.is_null"));
+                    .getString("organization.is_null"));
 
         Organization entity = getEntity(id);
 
@@ -130,13 +130,13 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
                 .equalsIgnoreCase(entity.getName()))
             entity.setName(data.getName());
 
-        return convertToDto(establishmentDao.save(entity));
+        return convertToDto(organizationDao.save(entity));
     }
 
     @Override
     public OrganizationResponse delete(Long id) {
         OrganizationResponse data = get(id);
-        establishmentDao.delete(id);
+        organizationDao.delete(id);
         return data;
     }
 
