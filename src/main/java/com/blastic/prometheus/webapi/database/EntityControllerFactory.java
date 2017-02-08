@@ -44,7 +44,7 @@ public class EntityControllerFactory {
         return NeighborhoodDaoController.getInstance();
     }
 
-    public static OrganizationDao getEstablishmentDao() {
+    public static OrganizationDao getOrganizationDao() {
         return OrganizationDaoController.getInstance();
     }
 

@@ -3,6 +3,8 @@ package com.blastic.prometheus.webapi.database.entity;
 import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.JoinColumn;
+import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -26,6 +28,10 @@ public class Patient extends Person {
 
     @Column(name = "OCCUPATION", length = 20)
     private String occupation;
+
+    @OneToOne
+    @JoinColumn(name = "ORGANIZATION")
+    private Organization organization;
 
     public Patient() {
     }
@@ -72,4 +78,13 @@ public class Patient extends Person {
     public void setOccupation(String occupation) {
         this.occupation = occupation;
     }
+
+    public Organization getOrganization() {
+        return organization;
+    }
+
+    public void setOrganization(Organization organization) {
+        this.organization = organization;
+    }
+
 }

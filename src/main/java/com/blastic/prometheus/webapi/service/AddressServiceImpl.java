@@ -35,7 +35,7 @@ public class AddressServiceImpl extends GenericService implements AddressService
             .getPersonController();
 
     private final OrganizationDao establishmentDao = EntityControllerFactory
-            .getEstablishmentDao();
+            .getOrganizationDao();
 
     private final NeighborhoodDao neighborhoodDao = EntityControllerFactory
             .getNeighborhoodController();

@@ -18,6 +18,8 @@ public class PatientRequest extends PatientData {
 
     private List<PhoneRequest> phones;
 
+    private Long organizationId;
+
     public PatientRequest() {
     }
 
@@ -27,12 +29,21 @@ public class PatientRequest extends PatientData {
             Gender gender, Calendar birthday, String observations,
             String nationality, CivilStatus civilStatus,
             AcademicLevel academicLevel,
-            String occupation) {
+            String occupation, Long organizationId) {
         super(identification, name, lastName, gender, birthday, observations,
                 nationality, civilStatus, academicLevel, occupation);
         this.addresses = addresses;
         this.emails = emails;
         this.phones = phones;
+        this.organizationId = organizationId;
+    }
+
+    public Long getOrganizationId() {
+        return organizationId;
+    }
+
+    public void setOrganizationId(Long organizationId) {
+        this.organizationId = organizationId;
     }
 
     public List<AddressRequest> getAddresses() {

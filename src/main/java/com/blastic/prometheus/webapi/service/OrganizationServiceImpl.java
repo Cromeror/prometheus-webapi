@@ -30,7 +30,7 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
         DtoConverter<Organization, OrganizationRequest, OrganizationResponse> {
 
     private final OrganizationDao organizationDao = EntityControllerFactory
-            .getEstablishmentDao();
+            .getOrganizationDao();
 
     private final NeighborhoodDao neighborhoodDao = EntityControllerFactory
             .getNeighborhoodController();
@@ -76,7 +76,7 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
     }
 
     /**
-     * Returns the establishment entity by id provided
+     * Returns the organization entity by id provided
      *
      * @param id Organization id
      * @return Searched entity
@@ -86,13 +86,13 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
             throw new BadRequestException(config
                     .getString("organization.id_required"));
 
-        Organization establishment = organizationDao.findByCustomerId(id);
+        Organization organization = organizationDao.findByCustomerId(id);
 
-        if (establishment == null)
+        if (organization == null)
             throw new NotFoundException(String.format(config
                     .getString("organization.not_found"), id));
 
-        return establishment;
+        return organization;
     }
 
     @Override

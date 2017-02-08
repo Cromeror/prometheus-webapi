@@ -3,6 +3,7 @@ package com.blastic.prometheus.webapi.service;
 import com.blastic.prometheus.webapi.database.EntityControllerFactory;
 import com.blastic.prometheus.webapi.database.dao.EmailDao;
 import com.blastic.prometheus.webapi.database.dao.NeighborhoodDao;
+import com.blastic.prometheus.webapi.database.dao.OrganizationDao;
 import com.blastic.prometheus.webapi.database.dao.PhoneDao;
 import com.blastic.prometheus.webapi.database.entity.Address;
 import com.blastic.prometheus.webapi.database.entity.Email;
@@ -30,6 +31,7 @@ import javax.ws.rs.BadRequestException;
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;
 import com.blastic.prometheus.webapi.database.dao.PatientDao;
+import com.blastic.prometheus.webapi.database.entity.Organization;
 
 /**
  * @author Cristóbal Romero Rossi <cristobalromerorossi@gmail.com>
@@ -49,6 +51,29 @@ public class PatientServiceImpl extends GenericService implements PatientService
 
     private final NeighborhoodDao neighborhoodDao = EntityControllerFactory
             .getNeighborhoodController();
+
+    private final OrganizationDao organizationDao
+            = EntityControllerFactory.getOrganizationDao();
+
+    /**
+     * Returns the organization entity by id provided
+     *
+     * @param id Organization id
+     * @return Searched entity
+     */
+    public Organization getOrganizationEntity(Long id) {
+        if (id == null || id <= 0)
+            throw new BadRequestException(config
+                    .getString("organization.id_required"));
+
+        Organization organization = organizationDao.findByCustomerId(id);
+
+        if (organization == null)
+            throw new NotFoundException(String.format(config
+                    .getString("organization.not_found"), id));
+
+        return organization;
+    }
 
     @Override
     public PatientResponse add(PatientRequest data) {
@@ -190,6 +215,8 @@ public class PatientServiceImpl extends GenericService implements PatientService
         if (data.getBirthday() != null && !data.getBirthday().equals(entity
                 .getBirthday()))
             entity.setBirthday(data.getBirthday());
+        if (data.getOrganizationId() != null && data.getOrganizationId() > 0)
+            entity.setOrganization(getOrganizationEntity(data.getOrganizationId()));
 
         return convertToDto(particularDao.save(entity));
     }
