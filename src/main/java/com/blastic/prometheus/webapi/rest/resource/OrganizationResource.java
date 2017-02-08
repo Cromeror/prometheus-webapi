@@ -1,15 +1,21 @@
 package com.blastic.prometheus.webapi.rest.resource;
 
+import com.blastic.prometheus.webapi.model.dto.ListResponse;
 import com.blastic.prometheus.webapi.model.dto.OrganizationRequest;
 import com.blastic.prometheus.webapi.model.dto.OrganizationResponse;
+import com.blastic.prometheus.webapi.rest.bean.OrganizationBean;
 import com.blastic.prometheus.webapi.service.OrganizationService;
 import com.blastic.prometheus.webapi.service.ServiceFactory;
 import java.net.URI;
 import java.util.Collections;
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.BeanParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
@@ -40,14 +46,30 @@ public class OrganizationResource {
                 .getId().toString()).build();
         return Response.created(location).entity(organization).build();
     }
-//    @GET
-//    public ListResponse<PatientResponse> getAll(@BeanParam PatientBean bean) {
-//        if (bean.getSize() == null)
-//            bean.setSize(20);
-//        service.configurate(Collections.list(request.getLocales()));
-//        return service.getAll(bean.getStart(), bean.getSize(), bean.getSearch(),
-//                bean.getOrderBy(), bean.getOrderType(), bean.getGender());
-//    }
+
+    @GET
+    public ListResponse<OrganizationResponse> getAll(@BeanParam OrganizationBean bean) {
+        if (bean.getSize() == null)
+            bean.setSize(20);
+        service.configurate(Collections.list(request.getLocales()));
+        return service.getAll(bean.getStart(), bean.getSize(), bean.getSearch(),
+                bean.getOrderBy(), bean.getOrderType());
+    }
+
+    @GET
+    @Path("{id}")
+    public OrganizationResponse get(@PathParam("id") Long id) {
+        service.configurate(Collections.list(request.getLocales()));
+        return service.get(id);
+    }
+
+    @PUT
+    @Path("{id}")
+    public OrganizationResponse put(@PathParam("id") Long id,
+            OrganizationRequest data) {
+        service.configurate(Collections.list(request.getLocales()));
+        return service.update(id, data);
+    }
 
     @Path("{orgId}/patients")
     public PatientResource patients() {
