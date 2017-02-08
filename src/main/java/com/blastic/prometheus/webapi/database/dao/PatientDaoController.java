@@ -124,5 +124,4 @@ public class PatientDaoController extends EntityDao<Patient, Long>
         return restrictions.isEmpty() ? null : restrictions
                 .toArray(new Predicate[restrictions.size()]);
     }
-
 }

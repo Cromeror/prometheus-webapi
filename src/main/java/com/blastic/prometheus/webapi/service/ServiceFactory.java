@@ -28,7 +28,7 @@ public class ServiceFactory {
         return new OrganizationServiceImpl();
     }
 
-    public static PatientService getParticularService() {
+    public static PatientService getPatientService() {
         return new PatientServiceImpl();
     }
 

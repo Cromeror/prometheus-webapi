@@ -26,13 +26,6 @@ public interface OrganizationDao
     List<Organization> findAll(int start, int size, String search, 
             String orderBy, OrderType orderType);
     
-    /**
-     * Returns a establishment entity by customer ID
-     * 
-     * @param id Customer ID
-     * @return Organization entity
-     */
-    Organization findByCustomerId(Long id);
     
     /**
      * Returns the find all result count 

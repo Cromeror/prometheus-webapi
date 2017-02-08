@@ -79,12 +79,6 @@ public class OrganizationDaoController extends EntityDao<Organization, Long>
     }
 
     @Override
-    public Organization findByCustomerId(Long id) {
-        return executeNamedQuery("establishment.findByCustomerId",
-                new Parameter("customerId", id));
-    }
-
-    @Override
     public long findAllCount(String search) {
         EntityManager manager = getEntityManager();
         try {

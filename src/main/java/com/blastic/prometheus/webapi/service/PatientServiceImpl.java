@@ -40,7 +40,7 @@ import com.blastic.prometheus.webapi.database.entity.Organization;
 public class PatientServiceImpl extends GenericService implements PatientService,
         DtoConverter<Patient, PatientRequest, PatientResponse> {
 
-    private final PatientDao particularDao = EntityControllerFactory
+    private final PatientDao patientDao = EntityControllerFactory
             .getPatientController();
 
     private final EmailDao emailDao = EntityControllerFactory
@@ -66,7 +66,7 @@ public class PatientServiceImpl extends GenericService implements PatientService
             throw new BadRequestException(config
                     .getString("organization.id_required"));
 
-        Organization organization = organizationDao.findByCustomerId(id);
+        Organization organization = organizationDao.find(id);
 
         if (organization == null)
             throw new NotFoundException(String.format(config
@@ -148,8 +148,11 @@ public class PatientServiceImpl extends GenericService implements PatientService
                 throw new ServiceException(errors);
             }
         }
+        Patient p = convertToEntity(data);
+        if (data.getOrganizationId() != null && data.getOrganizationId() > 0)
+            p.setOrganization(getOrganizationEntity(data.getOrganizationId()));
 
-        return convertToDto(particularDao.save(convertToEntity(data)));
+        return convertToDto(patientDao.save(p));
     }
 
     @Override
@@ -158,22 +161,22 @@ public class PatientServiceImpl extends GenericService implements PatientService
     }
 
     /**
-     * Returns the particular entity from id provided
+     * Returns the patient entity from id provided
      *
-     * @param id ID of the particular
+     * @param id ID of the patient
      * @return searched entity
      */
     private Patient getEntity(Long id) {
         if (id == null || id <= 0)
             throw new BadRequestException(config.getString("person.id_required"));
 
-        Patient particular = particularDao.findByCustomerId(id);
+        Patient patient = patientDao.findByCustomerId(id);
 
-        if (particular == null)
+        if (patient == null)
             throw new NotFoundException(String.format(config
                     .getString("particular.not_found"), id));
 
-        return particular;
+        return patient;
     }
 
     @Override
@@ -185,14 +188,14 @@ public class PatientServiceImpl extends GenericService implements PatientService
             throw new BadRequestException(config.getString("pagination.size"));
 
         List<PatientResponse> response = new ArrayList<>();
-        List<Patient> result = particularDao.findAll(start, size, search,
+        List<Patient> result = patientDao.findAll(start, size, search,
                 orderBy, orderType, gender);
 
-        for (Patient particular : result) {
-            response.add(convertToDto(particular));
+        for (Patient patient : result) {
+            response.add(convertToDto(patient));
         }
 
-        return new ListResponse<>(particularDao.findAllCount(search, gender),
+        return new ListResponse<>(patientDao.findAllCount(search, gender),
                 response);
     }
 
@@ -218,13 +221,13 @@ public class PatientServiceImpl extends GenericService implements PatientService
         if (data.getOrganizationId() != null && data.getOrganizationId() > 0)
             entity.setOrganization(getOrganizationEntity(data.getOrganizationId()));
 
-        return convertToDto(particularDao.save(entity));
+        return convertToDto(patientDao.save(entity));
     }
 
     @Override
     public PatientResponse delete(Long id) {
         PatientResponse data = get(id);
-        particularDao.delete(id);
+        patientDao.delete(id);
         return data;
     }
 

@@ -39,6 +39,9 @@ public class Organization implements Serializable {
             fetch = FetchType.EAGER)
     private List<Address> addresses;
 
+    @OneToMany(mappedBy = "organization", cascade = CascadeType.ALL)
+    private List<Patient> patients;
+
     public Organization() {
     }
 
@@ -90,4 +93,21 @@ public class Organization implements Serializable {
                 address.setOrganization(this);
         }
     }
+
+    public List<Patient> getPatients() {
+        return patients;
+    }
+
+    public void setPatients(List<Patient> patients) {
+        this.patients = patients;
+    }
+
+    public void addPatient(Patient patient) {
+        if (patients == null)
+            patients = new ArrayList<>();
+
+        patient.setOrganization(this);
+        patients.add(patient);
+    }
+
 }

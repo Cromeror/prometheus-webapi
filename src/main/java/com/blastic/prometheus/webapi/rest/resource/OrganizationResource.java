@@ -49,4 +49,9 @@ public class OrganizationResource {
 //                bean.getOrderBy(), bean.getOrderType(), bean.getGender());
 //    }
 
+    @Path("{orgId}/patients")
+    public PatientResource patients() {
+        return new PatientResource(request);
+    }
+
 }

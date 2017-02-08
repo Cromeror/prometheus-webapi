@@ -4,7 +4,7 @@ import java.util.Calendar;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 import javax.persistence.Table;
 
@@ -29,7 +29,7 @@ public class Patient extends Person {
     @Column(name = "OCCUPATION", length = 20)
     private String occupation;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "ORGANIZATION")
     private Organization organization;
 

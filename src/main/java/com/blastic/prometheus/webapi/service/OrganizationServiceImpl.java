@@ -86,7 +86,7 @@ public class OrganizationServiceImpl extends GenericService implements Organizat
             throw new BadRequestException(config
                     .getString("organization.id_required"));
 
-        Organization organization = organizationDao.findByCustomerId(id);
+        Organization organization = organizationDao.find(id);
 
         if (organization == null)
             throw new NotFoundException(String.format(config
